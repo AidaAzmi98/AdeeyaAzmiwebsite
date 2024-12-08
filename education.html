@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Georgia", serif;
+            background: url('gallery/educationbackground.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+
+        header {
+            text-align: center;
+            margin: 20px 0;
+            font-family: "Times New Roman", serif;
+            font-size: 2.5em;
+            color: #ffc0cb;
+            text-shadow: 2px 2px 5px #333;
+        }
+
+        .education-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .education-box {
+            width: 80%;
+            height: 200px;
+            background-color: rgba(255, 192, 203, 0.6);
+            color: white;
+            border: 2px solid #ffb6c1;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 1.8em;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            font-family: "Georgia", serif;
+        }
+
+        .education-box:hover {
+            transform: scale(1.05);
+            background-color: rgba(255, 105, 180, 0.9);
+        }
+
+        .back-button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-button {
+            padding: 10px 20px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: "Georgia", serif;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #ff1493;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: rgba(255, 240, 245, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            width: 500px;
+            max-height: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            overflow-y: auto;
+        }
+
+        .popup-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 2px solid #ffb6c1;
+        }
+
+        .popup-description {
+            font-size: 1em;
+            color: #333;
+            font-family: "Georgia", serif;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .popup-close {
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            cursor: pointer;
+        }
+
+        .popup-close:hover {
+            color: #ff69b4;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="background">
+        <header>
+            <h1>My Education Journey</h1>
+        </header>
+        
+        <div class="education-container">
+            <div class="education-box primary-school" onclick="showPopup('Primary School', 'gallery/skski.jpg', ['Point 1: Completed primary education at SK Sungai Kapar Indah, attending from Year 1 to Year 6.', 'Point 2: Served as a peer mentor and participated in performances for Children\'s Day and the Year 6 Graduation Ceremony.'])">
+                <p>Primary School</p>
+            </div>
+            <div class="education-box secondary-school" onclick="showPopup('Secondary School', 'gallery/smkpk2.jpg', ['Point 1: Attended secondary school at SMK (P) Kapar from Form 1 to Form 5. It was the best era ever!', 'Point 2: Appointed as a school prefect in Form 1 and served as the Head of the Equipment Committee in Forms 4 and 5.'])">
+                <p>Secondary School</p>
+            </div>
+            <div class="education-box university" onclick="showPopup('University', 'gallery/uitmrembau.jpg', ['Point 1: A Semester 5 Information Management student.', 'Point 2: Was a member of the IPMM Club during Semester 3 and Semester 4.'])">
+                <p>University</p>
+            </div>
+        </div>
+        
+        <div class="back-button-container">
+            <button class="back-button" onclick="goBack()">Back to Her Page</button>
+        </div>
+        
+        <div class="popup" id="popup">
+            <div class="popup-content">
+                <img id="popup-image" class="popup-image" src="" alt="Popup Image">
+                <div id="popup-description" class="popup-description"></div>
+                <button class="close-button" onclick="closePopup()">✖</button>
+            </div>
+        </div>
+    </div>
+	
+    <script>
+        function showPopup(title, imageSrc, points) {
+            const popup = document.getElementById('popup');
+            const popupImage = document.getElementById('popup-image');
+            const popupDescription = document.getElementById('popup-description');
+            popupImage.src = imageSrc;
+            let descriptionHTML = `<h2>${title}</h2><ul>`;
+            points.forEach((point) => {
+                descriptionHTML += `<li>${point}</li>`;
+            });
+            descriptionHTML += '</ul>';
+            popupDescription.innerHTML = descriptionHTML;
+            popup.style.display = 'block';
+        }
+        function closePopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'none';
+        }
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+	
+</body>
+</html>

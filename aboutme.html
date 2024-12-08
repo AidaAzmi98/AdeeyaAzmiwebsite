@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <style>
+        /* Reset and general styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f6f6f6;
+            color: #333;
+        }
+
+        h1, h3 {
+            font-family: 'Georgia', serif;
+            color: #D6A1C2;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #D6A1C2;
+        }
+
+        /* Background and layout styling */
+        .background {
+            background-image: url('gallery/pinkmakeup.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            opacity: 0.95;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 20px;
+            max-width: 1000px;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        .profile img {
+            width: 100%;
+            border-radius: 50%;
+            border: 10px solid #D6A1C2;
+            box-shadow: 0 0 15px rgba(255, 192, 203, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .profile img:hover {
+            transform: scale(1.05);
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(255, 192, 203, 0.8);
+        }
+
+        .clickable {
+            color: #D6A1C2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .clickable:hover {
+            text-decoration: underline;
+        }
+
+        /* Popup Modal styling */
+        .popup-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 20px;
+            width: 60%;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .popup-content h2 {
+            font-family: 'Georgia', serif;
+            color: #D6A1C2;
+        }
+
+        .popup-content p {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+
+        .close-button {
+            background-color: #D6A1C2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .close-button:hover {
+            background-color: #D1A1C2;
+        }
+
+        /* Back button styling */
+        .back-button {
+            padding: 10px 20px;
+            background-color: #9B666F;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #9B666F;
+        }
+
+        /* Footer styling */
+        footer {
+            color: #fff;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="container">
+            <div class="box profile">
+                <img src="gallery/aidaimage.jpg" alt="My Picture">
+            </div>
+            <div class="box details">
+                <ul>
+                    <li><strong><a href="#" class="clickable" onclick="showPopup('Name', 'Aida Madihah Azmi', 'Birthday: 9th August 2004. HKMC, Kuala Lumpur<br>Live in: Taman Seri Idaman Garden, Kg Tok Muda, Kapar')">Name</a></strong></li>
+                    <li><strong><a href="#" class="clickable" onclick="showPopup('Favorite Food', 'Buttermilk Chicken')">Favorite Food</a></strong></li>
+                    <li><strong><a href="#" class="clickable" onclick="showPopup('Favorite Song ATM', 'Number One Girl by ROSE\'')">Favorite Song ATM</a></strong></li>
+                    <li><strong><a href="#" class="clickable" onclick="showPopup('Status', 'Single till Jannah')">Status</a></strong></li>
+                    <li><strong><a href="#" class="clickable" onclick="showPopup('Interest', 'Badminton, Make-up, Learning to cook with Ain Wangsa Maju')">Interest</a></strong></li>
+                    <li><strong><a href="#" class="clickable" onclick="showPopup('Love Language', 'Acts of Service & Physical Affection')">Love Language</a></strong></li>
+                </ul>
+            </div>
+            <div class="box hobbies">
+                <h3><a href="#" class="clickable" onclick="showPopup('Hobbies', 'I like to read novels, depending on my mood. I sing while doing chores and listen to podcasts.')">Hobbies</a></h3>
+            </div>
+            <div class="box motto">
+                <h3><a href="#" class="clickable" onclick="showPopup('Life Motto', 'Breath like a bitch to those who play bitch - Farah Hauni, 4FIRAUN quotes')">Life Motto</a></h3>
+            </div>
+        </div>
+
+        <button class="back-button" onclick="history.back()">Back</button>
+        <footer>
+            &copy; 2024 Aida's Portfolio | Designed by Aidaazmi
+        </footer>
+    </div>
+    
+    <div id="popup-modal" class="popup-modal">
+        <div class="popup-content">
+            <h2 id="popup-title"></h2>
+            <div id="popup-description"></div>
+            <button class="close-button" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function showPopup(title, description) {
+            document.getElementById('popup-title').innerHTML = title;
+            document.getElementById('popup-description').innerHTML = description;
+            document.getElementById('popup-modal').style.display = 'flex';
+        }
+        function closePopup() {
+            document.getElementById('popup-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

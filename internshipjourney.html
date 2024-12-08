@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internship Journey</title>
+  <style>
+    /* General body styling */
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Times New Roman, sans-serif;
+    }
+
+    /* Background and container styling */
+    .background {
+      background: url('gallery/pinkworkplace.jpg') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 50px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3em;
+      color: #ff6f61;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+    }
+
+    /* Styling for the media container */
+    .internship-container {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      flex-wrap: wrap;
+      max-width: 90%;
+      margin: auto;
+    }
+
+    /* Box styling for media items */
+    .media-box {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      background-color: #f7f7f7;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    /* Media content styling */
+    .media-image, .media-video {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    /* Button styling */
+    .media-button {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 15px;
+      background-color: #ff6f61;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .media-button:hover {
+      background-color: #e55b4f;
+    }
+
+    /* Back button styling */
+    .back-button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      padding: 10px 20px;
+      background-color: #ffc0cb;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #e55b4f;
+    }
+
+    /* Popup modal styling */
+    .popup {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .popup-content {
+      max-width: 80%;
+      max-height: 80%;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .popup-media {
+      max-width: 100%;
+      max-height: 70vh;
+      display: none;
+    }
+
+    .popup-description {
+      color: white;
+      padding: 20px;
+      font-size: 1.2em;
+    }
+
+    .popup-close {
+      color: white;
+      font-size: 30px;
+      font-weight: bold;
+      position: absolute;
+      top: 10px;
+      right: 25px;
+      cursor: pointer;
+    }
+
+    .popup-close:hover {
+      color: #ff6f61;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background">
+    <header>
+      <h1>My Internship Journey</h1>
+    </header>
+    <div class="internship-container">
+      <div class="media-box">
+        <img src="gallery/APC.png" alt="Picture 1" class="media-image" onclick="showPopup('image', 'APC.png', 'This is Picture 1 description')" />
+        <button class="media-button" onclick="showPopup('image', 'APC.png', 'Anugerah Perkhidmatan Cemerlang 2023 as an AJK')">View</button>
+      </div>
+      <div class="media-box">
+        <img src="gallery/KSEMANIS.png" alt="Picture 2" class="media-image" onclick="showPopup('image', 'KSEMANIS.png', 'This is Picture 2 description')" />
+        <button class="media-button" onclick="showPopup('image', 'KSEMANIS.png', 'Being AJK for KSEMANIS 2024 in KSL Esplanade Mall')">View</button>
+      </div>
+      <div class="media-box">
+        <img src="gallery/farewellaida.jpg" alt="Picture 3" class="media-image" onclick="showPopup('image', 'farewellaida.jpg', 'This is Picture 3 description')" />
+        <button class="media-button" onclick="showPopup('image', 'farewellaida.jpg', 'Farewell celebration with all the PPD Klang staff')">View</button>
+      </div>
+      <div class="media-box">
+        <video class="media-video" controls>
+          <source src="gallery/KSEMANIS video.mp4" type="video/mp4" />
+        </video>
+        <button class="media-button" onclick="showPopup('video', 'KSEMANIS video.mp4', 'Compilation moment in KSEMANIS 2024')">View</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="popup" class="popup">
+    <span class="popup-close" onclick="closePopup()">&times;</span>
+    <div class="popup-content">
+      <img id="popup-image" class="popup-media" />
+      <video id="popup-video" class="popup-media" controls></video>
+      <p class="popup-description" id="popup-description"></p>
+    </div>
+  </div>
+
+  <div class="back-button-container">
+    <button class="back-button" onclick="goBack()">Back to Experience</button>
+  </div>
+
+  <script>
+    function showPopup(type, src, description) {
+      const popup = document.getElementById("popup");
+      const popupImage = document.getElementById("popup-image");
+      const popupVideo = document.getElementById("popup-video");
+      const popupDescription = document.getElementById("popup-description");
+      popup.style.display = "flex";
+      popupImage.style.display = "none";
+      popupVideo.style.display = "none";
+      if (type === "image") {
+        popupImage.src = src;
+        popupImage.style.display = "block";
+      } else if (type === "video") {
+        popupVideo.src = src;
+        popupVideo.style.display = "block";
+      }
+      popupDescription.textContent = description;
+    }
+    function closePopup() {
+      const popup = document.getElementById("popup");
+      const popupImage = document.getElementById("popup-image");
+      const popupVideo = document.getElementById("popup-video");
+      popup.style.display = "none";
+      popupImage.src = ""; 
+      popupVideo.src = ""; 
+    }
+    document.getElementById("popup").addEventListener("click", function (event) {
+      if (event.target === this) {
+        closePopup();
+      }
+    });
+    function goBack() {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "experience.html"; 
+      }
+    }
+  </script>
+</body>
+</html>

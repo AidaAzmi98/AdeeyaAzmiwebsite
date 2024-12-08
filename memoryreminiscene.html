@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Album</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .background-image {
+            background-image: url('gallery/albumbcg.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .content {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 900px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .back-btn {
+            background-color: #f788df;
+            color: pink;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .back-btn:hover {
+            background-color: #f788df;
+        }
+        .album {
+            cursor: pointer;
+            border: 2px solid white;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .album-cover {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+        }
+        .album-pictures {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .album-pictures img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+        .album-pictures img:hover {
+            transform: scale(1.1);
+        }
+        .album-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+        .slide img {
+            width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+        }
+        .caption {
+            margin-top: 15px;
+            font-size: 1rem;
+            color: #333;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            user-select: none;
+        }
+        .prev {
+            left: 0;
+        }
+        .next {
+            right: 0;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                max-height: 85%;
+            }
+            .slide img {
+                max-height: 60vh;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="background-image">
+        <div class="content">
+            <button class="back-btn" onclick="goBack()">Back</button>
+            <h1>Sweet Memories</h1>
+            
+            <div class="album" onclick="openAlbum()">
+                <div class="album-cover">
+                    <p>Album : Aida's Unreleased</p>
+                </div>
+               
+                <div class="album-pictures">
+                    <img src="gallery/cameron1.jpg" alt="Image 1">
+                    <img src="gallery/cameron2.jpg" alt="Image 2">
+                    <img src="gallery/tawau1.jpg" alt="Image 3">
+                    <img src="gallery/evie.jpg" alt="Image 4">
+                    <img src="gallery/raya.jpg" alt="Image 5">
+                    <img src="gallery/pd6.jpg" alt="Image 6">
+                    <img src="gallery/dekan1.jpg" alt="Image 7">
+                    <img src="gallery/dekan2.jpg" alt="Image 8">
+                    <img src="gallery/photobooth.jpg" alt="Image 9">
+                    <img src="gallery/colorrun.jpg" alt="Image 10">
+                </div>
+            </div>
+
+            <div class="album-modal" id="album1" onclick="closeAlbum()">
+                <div class="modal-content" onclick="event.stopPropagation()">
+                    <span class="close" onclick="closeAlbum()">&times;</span>
+                    <div class="slideshow-container">
+                        <div class="slide fade">
+                            <img src="gallery/cameron1.jpg" alt="Image 1">
+                            <div class="caption">Memory 1: Tok Ayah and Nekma with little pumpkin Dadam at Cameron Tea Valley.</div>
+                        </div>
+                        <div class="slide fade">
+                            <img src="gallery/cameron2.jpg" alt="Image 2">
+                            <div class="caption">Memory 2: Dadam explorance time at Animal Feeding Rainbow Garden.</div>
+                        </div>
+                        <div class="slide fade">
+                            <img src="gallery/tawau1.jpg" alt="Image 3">
+                            <div class="caption">Memory 3: One of Tawau picture that I captured. A lot of scenery.</div>
+                        </div>
+                        <div class="slide fade">
+                            <img src="gallery/evie.jpg" alt="Image 4">
+                            <div class="caption">Memory 4: Quick catch-up session with my "bbf".</div>
+                        </div>
+                        <div class="slide fade">
+                            <img src="gallery/raya.jpg" alt="Image 5">
+                            <div class="caption">Memory 5: Raya moment with KGS girls after a long time (baraan time).</div>
+                        </div>
+                        <div class="slide fade">
+                            <img src="gallery/pd6.jpg" alt="Image 6">
+                            <div class="caption">Memory 6: Meknys birthday celebration at PD.</div>
+                        </div>
+                        <div class="slide fade">
+                            <img src="gallery/dekan1.jpg" alt="Image 7">
+                            <div class="caption">Memory 7: My first Dean award after 4 sem, alhamdulillah. With Ayon.</div>
+                        </div>
+                        <div class="slide fade">
+                            <img src="gallery/dekan2.jpg" alt="Image 8">
+                            <div class="caption">Memory 8: Dean award moment with Madam.</div>
+                        </div>
+                        <div class="slide fade">
+                            <img src="gallery/photobooth.jpg" alt="Image 9">
+                            <div class="caption">Memory 9: A photo booth moment after we got Ayam Gepuk Top Global.</div>
+                        </div>
+                        <div class="slide fade">
+                            <img src="gallery/colorrun.jpg" alt="Image 10">
+                            <div class="caption">Memory 10: Our final year so we tried to involve this fun run haha.</div>
+                        </div>
+                    </div>
+                    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+                    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function openAlbum() {
+            const albumModal = document.getElementById('album1');
+            albumModal.style.display = 'flex';
+            showSlide(1);
+        }
+        function closeAlbum() {
+            const albumModal = document.getElementById('album1');
+            albumModal.style.display = 'none';
+        }
+        let slideIndex = 1;
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            if (n > slides.length) slideIndex = 1;
+            if (n < 1) slideIndex = slides.length;
+
+            slides.forEach((slide) => (slide.style.display = 'none'));
+            slides[slideIndex - 1].style.display = 'block';
+        }
+        function changeSlide(n) {
+            showSlide((slideIndex += n));
+        }
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+</body>
+</html>
